@@ -24,13 +24,16 @@ const App  = () => {
           </p>
           <button onClick={signOut}>Sign out</button>
           <Grid className={classes.grid} container spacing={0} alignItems="center" justifyContent="center" style={{ height: '100vh' }}> 
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3} className={classes.mobile}>
               <DetailsCard title="Income" />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3} className={classes.main}>
               <MainPanel />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3} className={classes.desktop}>
+              <DetailsCard title="Income" />
+            </Grid>
+            <Grid item xs={12} sm={3} className={classes.last}>
               <DetailsCard title="Expense" />
             </Grid>
           </Grid>

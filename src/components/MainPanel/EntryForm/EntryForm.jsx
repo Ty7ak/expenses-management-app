@@ -7,6 +7,7 @@ import { useSpeechContext } from '@speechly/react-client';
 import useStyles from './styles';
 import { incomeCategories, expenseCategories } from '../../../constants/categories';
 import formatDate from '../../../utils/formatDate';
+import ConfirmSnackbar from '../../Snackbar/Snackbar';
 
 const initialState = {
     amount: '',
@@ -20,9 +21,12 @@ const EntryForm = () => {
     const [formData, setFormData] = useState(initialState);
     const { addTransaction } = useContext(ExpensesManagerContext);
     const { segment } = useSpeechContext();
+    const [open, setOpen] = useState(false);
 
     const createTransaction = () => {
         const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() };
+
+        setOpen(true)
         addTransaction(transaction);
         setFormData(initialState);
     }
@@ -68,6 +72,7 @@ const EntryForm = () => {
 
     return (
         <Grid container spacing = {2}>
+            <ConfirmSnackbar open={open} setOpen={setOpen} />
             <Grid item xs={12}>
                 <Typography align="center" variant="subtitle2" gutterBottom>
                     {segment ? (

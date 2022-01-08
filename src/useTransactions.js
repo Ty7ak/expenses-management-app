@@ -13,6 +13,7 @@ const useTransactions = (title) => {
   rightTransactions.forEach((t) => {
     const category = categories.find((c) => c.type === t.category);
 
+    // tutaj mozna poszczegolne kategorie
     if (category) category.amount += t.amount;
   });
   // filtrowanie
