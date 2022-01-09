@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Grid } from '@material-ui/core';
+import { Grid, AppBar, Button, Typography, Divider } from '@material-ui/core';
 import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from '@speechly/react-ui';
 
 import DetailsCard from './components/DetailsCard/DetailsCard';
@@ -19,10 +19,12 @@ const App  = () => {
 
   
         <div className="App">
-          <p>
-            Hey {user.username}, welcome to my channel, with auth!
-          </p>
-          <button onClick={signOut}>Sign out</button>
+          <AppBar className={classes.appbar}>
+            <Grid container spacing = {0} justifyContent="flex-end">
+              <Divider orientation="vertical" flexItem/>
+              <Button onClick={signOut}>Sign out</Button>
+            </Grid>
+          </AppBar>
           <Grid className={classes.grid} container spacing={0} alignItems="center" justifyContent="center" style={{ height: '100vh' }}> 
             <Grid item xs={12} sm={3} className={classes.mobile}>
               <DetailsCard title="Income" />
