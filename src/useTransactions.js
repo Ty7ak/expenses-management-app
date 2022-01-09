@@ -2,21 +2,24 @@ import { useContext } from 'react';
 import { ExpensesManagerContext } from './context/context';
 
 import { incomeCategories, expenseCategories, resetCategories } from './constants/categories';
+import filterDates from './utils/filterDates';
 
 const useTransactions = (title) => {
   resetCategories();
-  const { transactions } = useContext(ExpensesManagerContext);
+  const { transactions, filter } = useContext(ExpensesManagerContext);
   const rightTransactions = transactions.filter((t) => t.type === title);
-  const total = rightTransactions.reduce((acc, currVal) => acc += currVal.amount, 0);
+  let total = 0;
+  //const total = rightTransactions.reduce((acc, currVal) => acc += currVal.amount, 0);
   const categories = title === 'Income' ? incomeCategories : expenseCategories;
 
   rightTransactions.forEach((t) => {
     const category = categories.find((c) => c.type === t.category);
 
-    // tutaj mozna poszczegolne kategorie
-    if (category) category.amount += t.amount;
+    if (category && filterDates(t.date, filter)) {
+      category.amount += t.amount;
+      total += t.amount;
+    } 
   });
-  // filtrowanie
   const filteredCategories = categories.filter((sc) => sc.amount > 0);
 
   const chartData = {

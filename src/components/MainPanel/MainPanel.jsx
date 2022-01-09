@@ -6,6 +6,7 @@ import EntryForm from './EntryForm/EntryForm';
 import TransactionsList from './TransactionsList/TransactionsList';
 import { ExpensesManagerContext } from '../../context/context';
 import InfoCard from '../InfoCard'
+import FilterCard from './FilterCard/FilterCard'
 
 const MainPanel = () => {
     const classes = useStyles();
@@ -28,6 +29,8 @@ const MainPanel = () => {
                         <TransactionsList />
                     </Grid>
                 </Grid>
+                <Divider className={classes.divider} />
+                <FilterCard />
             </CardContent>
         </Card>
     )
