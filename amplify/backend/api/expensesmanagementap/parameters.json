@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "expensesmanagementap",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authexpensesmanagementap9ae7def9",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-01-11T12:36:43.313Z"
+}

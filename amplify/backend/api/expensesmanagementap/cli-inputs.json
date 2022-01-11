@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "expensesmanagementap",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Apps\\Expenses-manager-app-fixed\\expenses-management-app\\amplify\\backend\\api\\expensesmanagementap\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authexpensesmanagementap9ae7def9"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
+  }
+}

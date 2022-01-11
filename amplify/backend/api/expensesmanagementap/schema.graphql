@@ -1,0 +1,7 @@
+type Transaction @model @auth(rules: [{ allow: owner }]) {
+  amount: Float!
+  category: String!
+  date: String!
+  id: ID!
+  type: String!
+}

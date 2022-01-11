@@ -25,7 +25,6 @@ const EntryForm = () => {
 
     const createTransaction = () => {
         const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() };
-
         setOpen(true)
         addTransaction(transaction);
         setFormData(initialState);

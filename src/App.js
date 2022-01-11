@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Grid, AppBar, Button, Typography, Divider } from '@material-ui/core';
+import { Grid, AppBar, Button, Divider } from '@material-ui/core';
 import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from '@speechly/react-ui';
 
 import DetailsCard from './components/DetailsCard/DetailsCard';

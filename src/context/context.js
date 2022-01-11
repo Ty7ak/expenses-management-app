@@ -1,9 +1,27 @@
 import React, { useReducer, createContext, useState } from 'react';
+import { API, graphqlOperation  } from 'aws-amplify';
+import { listTransactions } from '../graphql/queries';
 
 import formatDate from '../utils/formatDate';
 import contextReducer from './contextReducer';
 
 const initialState = JSON.parse(localStorage.getItem('transactions')) || [];
+
+async function fetchTransactions() {
+
+    let data;
+
+    try {
+        const transactions = API.graphql(graphqlOperation(listTransactions));        
+        if (transactions instanceof Promise) {
+            transactions.then((todos) => {
+            data = todos.data.listTransactions.items;
+            return data;
+            });
+        };
+    } catch (err) { console.log('Error fetching transactions') }
+  }
+  
 
 const dateFrom = formatDate(new Date(1, 1, 1));
 const dateTo = formatDate(new Date(9999, 1, 1));
@@ -18,6 +36,8 @@ export const Provider = ({ children }) => {
 
     const [transactions, dispatch] = useReducer(contextReducer, initialState);
     const [filter, setFilter] = useState(initialFilterState);
+
+    console.log(fetchTransactions());
 
     // Action Creators
     const deleteTransaction = (id) => {
