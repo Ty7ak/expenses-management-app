@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Card, CardHeader, CardContent, Typography, Grid, Divider } from '@material-ui/core';
 
 import useStyles from './styles';
@@ -7,10 +7,30 @@ import TransactionsList from './TransactionsList/TransactionsList';
 import { ExpensesManagerContext } from '../../context/context';
 import InfoCard from '../InfoCard'
 import FilterCard from './FilterCard/FilterCard'
+import { useRenderOnce } from '../../utils/useRenderOnce';
+
+import { API, graphqlOperation  } from 'aws-amplify';
+import { listTransactions } from '../../graphql/queries';
 
 const MainPanel = () => {
     const classes = useStyles();
     const { balance } = useContext(ExpensesManagerContext);
+
+    async function fetchTransactions() {
+        console.log("Fetching Data");
+        const transactions = await API.graphql(graphqlOperation(listTransactions));    
+        let data = transactions.data.listTransactions.items;
+        console.log(data);
+        localStorage.setItem('transactions', JSON.stringify(data));
+    };
+    
+    const firstRender = useRenderOnce();    
+    
+    useEffect(() => {
+        if (firstRender) {
+            fetchTransactions();
+        }
+    }, [firstRender]);
 
     return (
         <Card className={classes.root}>

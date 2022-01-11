@@ -7,14 +7,6 @@ import contextReducer from './contextReducer';
 
 const initialState = JSON.parse(localStorage.getItem('transactions')) || [];
 
-// async function fetchTransactions() {
-//     console.log("Fetching Data");
-//     const transactions = await API.graphql(graphqlOperation(listTransactions));    
-//     let data = transactions.data.listTransactions.items;
-//     console.log(data);
-//     localStorage.setItem('transactions', JSON.stringify(data));
-// };
-
 const dateFrom = formatDate(new Date(1, 1, 1));
 const dateTo = formatDate(new Date(9999, 1, 1));
 const initialFilterState = {
@@ -27,8 +19,6 @@ export const ExpensesManagerContext =  createContext(
 );
 
 export const Provider = ({ children }) => {
-
-    // fetchTransactions();
 
     const [transactions, dispatch] = useReducer(contextReducer, initialState);
     const [filter, setFilter] = useState(initialFilterState);
