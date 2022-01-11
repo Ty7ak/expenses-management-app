@@ -17,7 +17,6 @@ const EntryForm = () => {
     const { updateFilter } = useContext(ExpensesManagerContext);
 
     const filterTransactions = () => {
-
         updateFilter(formData);
     }
 

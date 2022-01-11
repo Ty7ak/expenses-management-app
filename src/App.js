@@ -8,9 +8,22 @@ import MainPanel from './components/MainPanel/MainPanel';
 import useStyles from './styles';
 
 import { Authenticator } from '@aws-amplify/ui-react';
+import { API, graphqlOperation  } from 'aws-amplify';
+import { listTransactions } from './graphql/queries';
 import '@aws-amplify/ui-react/styles.css';
 
 const App  = () => {
+
+  async function fetchTransactions() {
+    console.log("Fetching Data");
+    const transactions = await API.graphql(graphqlOperation(listTransactions));    
+    let data = transactions.data.listTransactions.items;
+    console.log(data);
+    localStorage.setItem('transactions', JSON.stringify(data));
+  };  
+  
+  fetchTransactions();
+
   const classes = useStyles();
 
   return (
