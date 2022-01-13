@@ -25,7 +25,7 @@ const EntryForm = () => {
 
     const createTransaction = () => {
         const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() };
-        setOpen(true)
+        setOpen(true);
         addTransaction(transaction);
         setFormData(initialState);
     }
@@ -71,7 +71,7 @@ const EntryForm = () => {
 
     return (
         <Grid container spacing = {2}>
-            <ConfirmSnackbar open={open} setOpen={setOpen} />
+            <ConfirmSnackbar open={open} setOpen={setOpen} content={"Transaction added successfully."}/>
             <Grid item xs={12}>
                 <Typography align="center" variant="subtitle2" gutterBottom>
                     {segment ? (

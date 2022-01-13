@@ -1,10 +1,9 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
-
 import useStyles from './styles'
 
-const ConfirmSnackbar = ({ open, setOpen }) => {
+const ConfirmSnackbar = ({ open, setOpen, content}) => {
     const classes = useStyles();
 
     const handleClose = (event, reason) => {
@@ -23,7 +22,7 @@ const ConfirmSnackbar = ({ open, setOpen }) => {
                 onClose={handleClose}
             >
                 <Alert onClose={handleClose} severity={"success"} elevation={6} variant="filled">
-                    Transaction successfully created.
+                    {content}
                 </Alert>
             </Snackbar>
             

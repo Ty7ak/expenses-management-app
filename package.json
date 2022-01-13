@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-amplify": "^4.3.11",
     "chart.js": "^3.7.0",
+    "material-ui-confirm": "^3.0.3",
     "react": "^16.12.0",
     "react-chartjs-2": "^4.0.0",
     "react-dom": "^16.12.0",

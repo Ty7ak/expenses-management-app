@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Grid, AppBar, Button, Divider } from '@material-ui/core';
 import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from '@speechly/react-ui';
 
 import DetailsCard from './components/DetailsCard/DetailsCard';
 import MainPanel from './components/MainPanel/MainPanel';
+import ConfirmationDialog from './components/ConfirmationDialog/ConfirmationDialog';
 import useStyles from './styles';
 
 import { Authenticator } from '@aws-amplify/ui-react';
+import { Auth } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 
 const App  = () => {
+
+  const [openDeleteUser, setOpenDeleteUser] = useState(false);
+
+  const handleDeleteCognitoUser = async () => {
+    setOpenDeleteUser(true);
+  }
 
   const classes = useStyles();
 
@@ -24,6 +32,8 @@ const App  = () => {
             <Grid container spacing = {0} justifyContent="flex-end">
               <Divider orientation="vertical" flexItem/>
               <Button onClick={signOut}>Sign out</Button>
+              <ConfirmationDialog open={openDeleteUser} setOpen={setOpenDeleteUser} />
+              <Button onClick={handleDeleteCognitoUser}>Delete account</Button>
             </Grid>
           </AppBar>
           <Grid className={classes.grid} container spacing={0} alignItems="center" justifyContent="center" style={{ height: '100vh' }}> 
