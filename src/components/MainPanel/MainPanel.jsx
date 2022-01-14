@@ -20,7 +20,6 @@ const MainPanel = () => {
         console.log("Fetching Data");
         const transactions = await API.graphql(graphqlOperation(listTransactions));    
         let data = transactions.data.listTransactions.items;
-        console.log(data);
         localStorage.setItem('transactions', JSON.stringify(data));
     };
     
@@ -46,7 +45,7 @@ const MainPanel = () => {
             <CardContent className={classes.CardContent}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <TransactionsList />
+                        <TransactionsList title="All" />
                     </Grid>
                 </Grid>
                 <Divider className={classes.divider} />

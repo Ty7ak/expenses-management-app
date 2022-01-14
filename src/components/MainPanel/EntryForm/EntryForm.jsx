@@ -24,6 +24,7 @@ const EntryForm = () => {
     const [open, setOpen] = useState(false);
 
     const createTransaction = () => {
+        if(Number.isNaN(Number(formData.amount))) return;
         const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() };
         setOpen(true);
         addTransaction(transaction);

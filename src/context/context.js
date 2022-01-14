@@ -1,6 +1,4 @@
 import React, { useReducer, createContext, useState, useEffect, useContext } from 'react';
-import { API, graphqlOperation  } from 'aws-amplify';
-import { listTransactions } from '../graphql/queries';
 
 import formatDate from '../utils/formatDate';
 import contextReducer from './contextReducer';
