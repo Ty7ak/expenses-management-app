@@ -4,17 +4,17 @@ import { Card, CardHeader, CardContent, Typography, Grid, Divider } from '@mater
 import useStyles from './styles';
 import EntryForm from './EntryForm/EntryForm';
 import TransactionsList from './TransactionsList/TransactionsList';
-import { ExpensesManagerContext } from '../../context/context';
 import InfoCard from '../InfoCard'
 import FilterCard from './FilterCard/FilterCard'
 import { useRenderOnce } from '../../utils/useRenderOnce';
+import useFilteredTransactions from '../../utils/useFilteredTransactions';
 
 import { API, graphqlOperation  } from 'aws-amplify';
 import { listTransactions } from '../../graphql/queries';
 
 const MainPanel = () => {
     const classes = useStyles();
-    const { balance } = useContext(ExpensesManagerContext);
+    const { filteredTotal } = useFilteredTransactions();
 
     async function fetchTransactions() {
         console.log("Fetching Data");
@@ -35,7 +35,7 @@ const MainPanel = () => {
         <Card className={classes.root}>
             <CardHeader title="Expenses Manager" subheader="Track your money" />
             <CardContent>
-                <Typography align="center" variant="h5">Total Balance ${balance}</Typography>
+                <Typography align="center" variant="h5">Total: ${filteredTotal}</Typography>
                 <Typography variant="subtitle1" style={{ lineHeight: '1.5em', marginTop: '20px'}}>
                     <InfoCard />
                 </Typography>
@@ -45,7 +45,7 @@ const MainPanel = () => {
             <CardContent className={classes.CardContent}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <TransactionsList title="All" />
+                        <TransactionsList />
                     </Grid>
                 </Grid>
                 <Divider className={classes.divider} />

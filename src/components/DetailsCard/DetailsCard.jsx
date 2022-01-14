@@ -3,7 +3,7 @@ import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 
-import useTransactions from '../../useTransactions';
+import useTransactions from '../../utils/useTransactions';
 import useStyles from './styles';
 
 const DetailsCard = ({ title }) => {

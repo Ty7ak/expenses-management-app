@@ -3,14 +3,14 @@ import { List as MUIList, ListItem, ListItemAvatar, ListItemText, Avatar, ListIt
 import { Delete, MoneyOff } from '@material-ui/icons';
 
 import { ExpensesManagerContext } from '../../../context/context';
-import useTransactions from '../../../useTransactions';
+import useFilteredTransactions from '../../../utils/useFilteredTransactions';
 import useStyles from './styles';
 
-const TransactionsList = ({ title }) => {
+const TransactionsList = () => {
     const classes = useStyles();
     const { deleteTransaction, transactions } = useContext(ExpensesManagerContext);
     
-    const { filteredTransactions } = useTransactions(title);
+    const { filteredTransactions } = useFilteredTransactions();
 
     return (
         <MUIList dense={false} className={classes.list}>

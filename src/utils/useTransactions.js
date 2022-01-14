@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { ExpensesManagerContext } from './context/context';
+import { ExpensesManagerContext } from '../context/context';
 
-import { incomeCategories, expenseCategories, resetCategories } from './constants/categories';
-import filterDates from './utils/filterDates';
+import { incomeCategories, expenseCategories, resetCategories } from '../constants/categories';
+import filterDates from './filterDates';
 
 const useTransactions = (title) => {
   resetCategories();
@@ -12,7 +12,6 @@ const useTransactions = (title) => {
   let total = 0;
   const categories = title === 'Income' ? incomeCategories : expenseCategories;
 
-  if(title !== "All") {
     rightTransactions.forEach((t) => {
       const category = categories.find((c) => c.type === t.category);
   
@@ -21,13 +20,7 @@ const useTransactions = (title) => {
         total += t.amount;
       } 
     });
-  } else if(title === "All") {  
-    transactions.forEach((t) => {
-      if(filterDates(t.date, filter)) {
-        filteredTransactions = [t, ...filteredTransactions];
-      }
-    })
-  }
+
   const filteredCategories = categories.filter((sc) => sc.amount > 0);
   const chartData = {
     datasets: [{
@@ -37,7 +30,7 @@ const useTransactions = (title) => {
     labels: filteredCategories.map((c) => c.type),
   };
 
-  return { filteredCategories, total, chartData, filteredTransactions };
+  return { filteredCategories, total, chartData };
 };
 
 export default useTransactions;
