@@ -90,6 +90,8 @@ const App  = () => {
               <DetailsCard title="Expense" />
             </Grid>
           </Grid>
+          <Grid style={{ height: '40vh' }}>
+          </Grid>
           <PushToTalkButtonContainer>
             <PushToTalkButton />
             <ErrorPanel />

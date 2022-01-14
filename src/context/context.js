@@ -34,6 +34,10 @@ export const Provider = ({ children }) => {
         setFilter(newFilter);
     }
 
+    const clearFilter = () => {
+        setFilter(initialFilterState);
+    }
+
     const balance = transactions.reduce((acc, currVal) => (currVal.type === 'Expense' ? acc - currVal.amount : acc + currVal.amount), 0);
 
     return (
@@ -41,6 +45,7 @@ export const Provider = ({ children }) => {
             deleteTransaction,
             addTransaction,
             updateFilter,
+            clearFilter,
             transactions,
             balance,
             filter

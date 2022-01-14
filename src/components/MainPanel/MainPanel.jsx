@@ -32,26 +32,31 @@ const MainPanel = () => {
     }, [firstRender]);
 
     return (
-        <Card className={classes.root}>
-            <CardHeader title="Expenses Manager" subheader="Track your money" />
-            <CardContent>
-                <Typography align="center" variant="h5">Total: ${filteredTotal}</Typography>
-                <Typography variant="subtitle1" style={{ lineHeight: '1.5em', marginTop: '20px'}}>
-                    <InfoCard />
-                </Typography>
-                <Divider className={classes.divider} />
-                <EntryForm />
-            </CardContent>
-            <CardContent className={classes.CardContent}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TransactionsList />
+        <Grid container spacing = {0} justifyContent="center">
+            <Card className={classes.root}>
+                <CardHeader title="Expenses Manager" subheader="Track your money" />
+                <CardContent>
+                    <Typography align="center" variant="h5">Total: ${filteredTotal}</Typography>
+                    <Typography variant="subtitle1" style={{ lineHeight: '1.5em', marginTop: '20px'}}>
+                        <InfoCard />
+                    </Typography>
+                    <Divider className={classes.divider} />
+                    <EntryForm />
+                </CardContent>
+            </Card>
+        <Grid style={{ height: '2vh' }}></Grid>
+            <Card className={classes.root}>
+                <CardContent className={classes.CardContent}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TransactionsList />
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Divider className={classes.divider} />
-                <FilterCard />
-            </CardContent>
-        </Card>
+                    <Divider className={classes.divider} />
+                    <FilterCard />
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 
