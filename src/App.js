@@ -10,11 +10,11 @@ import ConfirmationDialog from './components/ConfirmationDialog/ConfirmationDial
 import { ExpensesManagerContext } from './context/context';
 import useStyles from './styles';
 
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
 
-const App  = () => {
+const App  = ({ signOut }) => {
 
   const [openDeleteUser, setOpenDeleteUser] = useState(false);
   const [anchorE1, setanchorE1] = useState(null);
@@ -36,10 +36,6 @@ const App  = () => {
   const classes = useStyles();
 
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-
-  
         <div className="App">
           <ConfirmationDialog open={openDeleteUser} setOpen={setOpenDeleteUser} />
           <AppBar className={classes.appbar}>
@@ -97,11 +93,7 @@ const App  = () => {
             <ErrorPanel />
           </PushToTalkButtonContainer> 
         </div>
-
-
-      )}
-    </Authenticator>
-  );
+      )
 }
 
-export default App;
+export default withAuthenticator(App);
