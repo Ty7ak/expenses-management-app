@@ -43,9 +43,6 @@ const MainPanel = () => {
                     <Divider className={classes.divider} />
                     <EntryForm />
                 </CardContent>
-            </Card>
-        <Grid style={{ height: '2vh' }}></Grid>
-            <Card className={classes.root}>
                 <CardContent className={classes.CardContent}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>

@@ -13,6 +13,7 @@ import useStyles from './styles';
 import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import '@aws-amplify/ui-react/styles.css';
+import CustomAppBar from './components/CustomAppBar/CustomAppBar';
 
 const App  = ({ signOut }) => {
 
@@ -38,40 +39,7 @@ const App  = ({ signOut }) => {
   return (
         <div className="App">
           <ConfirmationDialog open={openDeleteUser} setOpen={setOpenDeleteUser} />
-          <AppBar className={classes.appbar}>
-            <Grid container spacing = {0} justifyContent="left" alignItems="center">
-            <div>
-              <IconButton 
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                disableScrollLock={true}
-                anchorE1={anchorE1}
-                getContentAnchorEl={null}
-                anchorOrigin={{vertical: 'top', horizontal: 'left'}}
-                keepMounted
-                transformOrigin={{vertical: 'top', horizontal: 'left'}}
-                open={Boolean(anchorE1)}
-                onClose={handleClose}    
-              > 
-                <MenuItem onClick={signOut}>
-                  Sign out
-                </MenuItem>
-                <Divider style={{margin: '5px'}}/>
-                <MenuItem onClick={handleDeleteCognitoUser}>
-                  Delete account
-                </MenuItem>
-              </Menu>
-              </div>
-              <Typography className={classes.balanceText} variant="button">Total Balance: ${balance}</Typography>
-            </Grid>
-          </AppBar>
+          <CustomAppBar handleDelete={handleDeleteCognitoUser} handleSignOut={signOut}/>
           <Grid className={classes.grid} container spacing={0} alignItems="center" justifyContent="center" style={{ height: '100vh' }}> 
             <Grid item xs={12} sm={3} className={classes.mobile}>
               <DetailsCard title="Income" />

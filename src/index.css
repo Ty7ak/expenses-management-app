@@ -1,7 +1,7 @@
 body {
   height: 100%;
   margin: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(./resources/cool-background.svg);
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),  url(./resources/cool-background1.svg);
   background-size: cover;
 }
 
