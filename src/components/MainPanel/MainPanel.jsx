@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Card, CardHeader, CardContent, Typography, Grid, Divider } from '@material-ui/core';
 
 import useStyles from './styles';
-import EntryForm from './EntryForm/EntryForm';
+import NewTransactionForm from './NewTransactionForm/NewTransactionForm';
 import TransactionsList from './TransactionsList/TransactionsList';
-import InfoCard from '../InfoCard'
 import FilterCard from './FilterCard/FilterCard'
 import { useRenderOnce } from '../../utils/useRenderOnce';
 import useFilteredTransactions from '../../utils/useFilteredTransactions';
@@ -17,7 +16,6 @@ const MainPanel = () => {
     const { filteredTotal } = useFilteredTransactions();
 
     async function fetchTransactions() {
-        console.log("Fetching Data");
         const transactions = await API.graphql(graphqlOperation(listTransactions));    
         let data = transactions.data.listTransactions.items;
         localStorage.setItem('transactions', JSON.stringify(data));
@@ -32,28 +30,35 @@ const MainPanel = () => {
     }, [firstRender]);
 
     return (
-        <Grid container spacing = {0} justifyContent="center">
             <Card className={classes.root}>
-                <CardHeader title="Expenses Manager" subheader="Track your money" />
-                <CardContent>
-                    <Typography align="center" variant="h5">Total: ${filteredTotal}</Typography>
-                    <Typography variant="subtitle1" style={{ lineHeight: '1.5em', marginTop: '20px'}}>
-                        <InfoCard />
-                    </Typography>
-                    <Divider className={classes.divider} />
-                    <EntryForm />
-                </CardContent>
-                <CardContent className={classes.CardContent}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                <CardHeader title="Expenses Manager" />
+                <Grid container spacing = {0}>
+                    <Grid item xs={6}>
+                        <CardContent>
+                            <Divider className={classes.divider} />
+                            <Typography align="center" variant="h6">Total: {filteredTotal}</Typography>
                             <TransactionsList />
+                            <Divider className={classes.divider} />
+                        </CardContent>
+                    </Grid>
+                    <Grid item container xs={6} justifyContent='space-between'>
+                        <Grid item xs={12} alignItems="center">
+                        <CardContent className={classes.CardContent}>
+                            <Divider className={classes.divider} />
+                            <Typography align="center" variant="h6">Add transaction</Typography>
+                            <NewTransactionForm />
+                            </CardContent>
+                        </Grid> 
+                        <Grid item xs={12}>     
+                        <CardContent className={classes.CardContent}>                          
+                            <Typography align="center" variant="h6">Filter transactions</Typography>
+                            <FilterCard />
+                            </CardContent>
                         </Grid>
                     </Grid>
-                    <Divider className={classes.divider} />
-                    <FilterCard />
-                </CardContent>
+                </Grid>
             </Card>
-        </Grid>
+
     )
 }
 

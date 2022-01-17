@@ -1,12 +1,15 @@
 import React, { useState, useContext } from 'react';
 import './App.css';
-import { Grid, AppBar, Button, Divider, Typography, Menu, MenuItem, IconButton } from '@material-ui/core';
+import { Grid, Card, Button, Divider, Typography, Menu, MenuItem, IconButton } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { PushToTalkButton, PushToTalkButtonContainer, ErrorPanel } from '@speechly/react-ui';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import DetailsCard from './components/DetailsCard/DetailsCard';
 import MainPanel from './components/MainPanel/MainPanel';
 import ConfirmationDialog from './components/ConfirmationDialog/ConfirmationDialog';
+import NewTransactionForm from './components/MainPanel/NewTransactionForm/NewTransactionForm';
+import FilterCard from './components/MainPanel/FilterCard/FilterCard'
 import { ExpensesManagerContext } from './context/context';
 import useStyles from './styles';
 
@@ -17,20 +20,18 @@ import CustomAppBar from './components/CustomAppBar/CustomAppBar';
 
 const App  = ({ signOut }) => {
 
+  
+  const theme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+
   const [openDeleteUser, setOpenDeleteUser] = useState(false);
-  const [anchorE1, setanchorE1] = useState(null);
 
   const handleDeleteCognitoUser = async () => {
     setOpenDeleteUser(true);
   }
-
-  const handleMenu = (e) => {
-    setanchorE1(e.currentTarget);
-  };
-
-  const handleClose = () => {
-    setanchorE1(null);
-  };
 
   const { balance } = useContext(ExpensesManagerContext);
 
@@ -39,22 +40,24 @@ const App  = ({ signOut }) => {
   return (
         <div className="App">
           <ConfirmationDialog open={openDeleteUser} setOpen={setOpenDeleteUser} />
-          <CustomAppBar handleDelete={handleDeleteCognitoUser} handleSignOut={signOut}/>
-          <Grid className={classes.grid} container spacing={0} alignItems="center" justifyContent="center" style={{ height: '100vh' }}> 
-            <Grid item xs={12} sm={3} className={classes.mobile}>
-              <DetailsCard title="Income" />
-            </Grid>
-            <Grid item xs={12} sm={3} className={classes.main}>
+          <CustomAppBar handleDeleteUser={handleDeleteCognitoUser} handleSignOut={signOut}/>
+
+          <Grid className={classes.grid} container spacing={0} alignItems="center" justifyContent="center"> 
+            <Grid item xs={12} sm={5} className={classes.main}>
               <MainPanel />
             </Grid>
-            <Grid item xs={12} sm={3} className={classes.desktop}>
-              <DetailsCard title="Income" />
+            <Grid item xs={12} sm={2} className={classes.mobile}>
+              <DetailsCard transactionType="Income" />
             </Grid>
-            <Grid item xs={12} sm={3} className={classes.last}>
-              <DetailsCard title="Expense" />
+            <Grid item xs={12} sm={2} className={classes.desktop}>
+              <DetailsCard transactionType="Income" />
+            </Grid>
+            <Grid item xs={12} sm={2} className={classes.last}>
+              <DetailsCard transactionType="Expense" />
             </Grid>
           </Grid>
-          <Grid style={{ height: '40vh' }}>
+
+          <Grid style={{ height: '10vh' }}>
           </Grid>
           <PushToTalkButtonContainer>
             <PushToTalkButton />

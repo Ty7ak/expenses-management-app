@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { ExpensesManagerContext } from '../context/context';
 
-import { incomeCategories, expenseCategories, resetCategories } from '../constants/categories';
+import { resetAmounts } from '../categories/categoryTypes';
 import filterDates from './filterDates';
 
 const useFilteredTransactions = () => {
-    resetCategories();
+    resetAmounts();
     const { transactions, filter } = useContext(ExpensesManagerContext);
     let filteredTransactions = [];
     let filteredTotal = 0;

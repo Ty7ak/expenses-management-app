@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { TextField, Typography, Grid, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { Grid, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { ExpensesManagerContext } from '../../../context/context';
-import { v4 as uuidv4 } from 'uuid';
-import { useSpeechContext } from '@speechly/react-client';
+import { v4 } from 'uuid';
 
 import useStyles from './styles';
-import { incomeCategories, expenseCategories } from '../../../constants/categories';
+import { incomes, expenses } from '../../../categories/categoryTypes';
 import formatDate from '../../../utils/formatDate';
-import ConfirmSnackbar from '../../Snackbar/Snackbar';
+import ConfirmSnackbar from '../../ConfirmSnackbar/ConfirmSnackbar';
+
+import { useSpeechContext } from '@speechly/react-client';
 
 const initialState = {
     amount: '',
@@ -16,7 +17,7 @@ const initialState = {
     date: formatDate(new Date()),
 };
 
-const EntryForm = () => {
+const NewTransactionForm = () => {
     const classes = useStyles();
     const [formData, setFormData] = useState(initialState);
     const { addTransaction } = useContext(ExpensesManagerContext);
@@ -25,7 +26,7 @@ const EntryForm = () => {
 
     const createTransaction = () => {
         if(Number.isNaN(Number(formData.amount))) return;
-        const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() };
+        const transaction = { ...formData, amount: Number(formData.amount), id: v4() };
         setOpen(true);
         addTransaction(transaction);
         setFormData(initialState);
@@ -46,9 +47,9 @@ const EntryForm = () => {
                         setFormData({ ...formData, amount: e.value})
                         break;
                     case 'category':
-                        if(incomeCategories.map((iC) => iC.type).includes(category)) {
+                        if(incomes.map((iC) => iC.type).includes(category)) {
                             setFormData({ ...formData, type: 'Income', category })
-                        } else if(expenseCategories.map((iC) => iC.type).includes(category)) {
+                        } else if(expenses.map((iC) => iC.type).includes(category)) {
                             setFormData({ ...formData, type: 'Expense', category })
                         }
         
@@ -68,7 +69,7 @@ const EntryForm = () => {
         }
     }, [segment]);
     
-    const selectedCategories = formData.type === 'Income' ? incomeCategories : expenseCategories;
+    const selectedCategories = formData.type === 'Income' ? incomes : expenses;
 
     return (
         <Grid container spacing = {2}>
@@ -116,4 +117,4 @@ const EntryForm = () => {
     )
 }
 
-export default EntryForm
+export default NewTransactionForm

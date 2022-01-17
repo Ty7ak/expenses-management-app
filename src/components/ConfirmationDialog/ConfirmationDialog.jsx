@@ -1,16 +1,17 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Box, IconButton, Typography } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@material-ui/core';
 import { Auth } from 'aws-amplify';
 
 import useStyles from './styles';
   
   const ConfirmationDialog = ({ open, setOpen }) => {
 
-    const handleConfirm = async (event, reason) => {
+    const handleConfirm = async (reason) => {
         if(reason === 'clickaway') return;
 
         const user = await Auth.currentAuthenticatedUser();
-        user.deleteUser((error, data) => {
+
+        user.deleteUser((error) => {
           if (error) {
             throw error;
           }    
@@ -20,7 +21,7 @@ import useStyles from './styles';
         setOpen(false);
     }
 
-    const handleClose = (event, reason) => {
+    const handleClose = (reason) => {
         if(reason === 'clickaway') return;
         setOpen(false);
     }
@@ -28,16 +29,28 @@ import useStyles from './styles';
     const classes = useStyles();
 
     return (
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-        <DialogTitle id='alert-dialog-title'>Deleting account</DialogTitle>
+      <Dialog 
+        className={classes.dialog} 
+        open={open} 
+        onClose={handleClose} 
+        fullWidth
+      >
+        <DialogTitle>Deleting account</DialogTitle>
         <DialogContent>
           <Typography>Are you sure you want to delete your account? This action is irreversible.</Typography>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose}>
+          <Button 
+            variant="outlined" 
+            onClick={handleClose}
+          >
             Cancel
           </Button>
-          <Button color="secondary" variant="contained" onClick={handleConfirm}>
+          <Button 
+            color="secondary" 
+            variant="outlined" 
+            onClick={handleConfirm}
+          >
             Delete
           </Button>
         </DialogActions>

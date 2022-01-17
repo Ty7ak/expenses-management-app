@@ -38,7 +38,7 @@ export const Provider = ({ children }) => {
         setFilter(initialFilterState);
     }
 
-    const balance = transactions.reduce((acc, currVal) => (currVal.type === 'Expense' ? acc - currVal.amount : acc + currVal.amount), 0);
+    const totalBalance = transactions.reduce((acc, currVal) => (currVal.type === 'Expense' ? acc - currVal.amount : acc + currVal.amount), 0);
 
     return (
         <ExpensesManagerContext.Provider value={{ 
@@ -47,7 +47,7 @@ export const Provider = ({ children }) => {
             updateFilter,
             clearFilter,
             transactions,
-            balance,
+            totalBalance,
             filter
          }}>
             {children}

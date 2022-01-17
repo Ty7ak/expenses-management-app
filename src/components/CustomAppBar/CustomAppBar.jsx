@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react'
-import { Grid, AppBar, Button, Divider, Typography, Menu, MenuItem, IconButton } from '@material-ui/core';
+
+import { Grid, AppBar, Divider, Typography, Menu, MenuItem, IconButton } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 
 import { ExpensesManagerContext } from '../../context/context';
+import InfoButton from '../InfoButton/InfoButton';
 import useStyles from './styles';
 
-const CustomAppBar = ({ handleDelete, handleSignOut }) => {
+const CustomAppBar = ({ handleDeleteUser, handleSignOut }) => {
 
     const classes = useStyles();
 
@@ -17,7 +19,7 @@ const CustomAppBar = ({ handleDelete, handleSignOut }) => {
         setanchorE1(null);
     };
     
-    const { balance } = useContext(ExpensesManagerContext);
+    const { totalBalance } = useContext(ExpensesManagerContext);
 
     const [anchorE1, setanchorE1] = useState(null);
 
@@ -25,22 +27,18 @@ const CustomAppBar = ({ handleDelete, handleSignOut }) => {
           <AppBar className={classes.appbar}>
             <Grid container spacing = {0} alignItems="center">
             <div>
-              <IconButton 
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
+              <IconButton
                 onClick={handleMenu}
               >
                 <AccountCircle />
               </IconButton>
               <Menu
-                id="menu-appbar"
                 disableScrollLock={true}
                 anchorE1={anchorE1}
                 getContentAnchorEl={null}
                 anchorOrigin={{vertical: 'top', horizontal: 'left'}}
-                keepMounted
                 transformOrigin={{vertical: 'top', horizontal: 'left'}}
+                keepMounted
                 open={Boolean(anchorE1)}
                 onClose={handleClose}    
               > 
@@ -48,12 +46,18 @@ const CustomAppBar = ({ handleDelete, handleSignOut }) => {
                   Sign out
                 </MenuItem>
                 <Divider style={{margin: '5px'}}/>
-                <MenuItem onClick={handleDelete}>
+                <MenuItem onClick={handleDeleteUser}>
                   Delete account
                 </MenuItem>
               </Menu>
               </div>
-              <Typography className={classes.balanceText} variant="button">Total Balance: ${balance}</Typography>
+              <InfoButton />
+              <Typography
+                className={classes.balanceText}
+                variant="button"
+              >
+                Total Balance: {totalBalance}
+              </Typography>
             </Grid>
           </AppBar>
     )
