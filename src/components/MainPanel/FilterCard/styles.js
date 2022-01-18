@@ -1,7 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
-  button: {
+  addButton: {
     marginTop: '20px',
+    borderRadius: "5em",
+    backgroundColor: "#424242"
+  },
+  clearButton: {
+    marginTop: '20px',
+    borderRadius: "5em",
   },
 }));

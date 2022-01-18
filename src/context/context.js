@@ -1,12 +1,18 @@
 import React, { useReducer, createContext, useState, useEffect, useContext } from 'react';
 
-import formatDate from '../utils/formatDate';
+import parseDate from '../utils/parseDate';
 import contextReducer from './contextReducer';
 
 const initialState = JSON.parse(localStorage.getItem('transactions')) || [];
 
-const dateFrom = formatDate(new Date(1, 1, 1));
-const dateTo = formatDate(new Date(9999, 1, 1));
+let initialCurrency = localStorage.getItem('currency');
+
+if ( initialCurrency === null) {
+    initialCurrency = "$";
+}
+
+const dateFrom = parseDate(new Date(1, 1, 1));
+const dateTo = parseDate(new Date(9999, 1, 1));
 const initialFilterState = {
     dateFrom,
     dateTo
@@ -20,6 +26,7 @@ export const Provider = ({ children }) => {
 
     const [transactions, dispatch] = useReducer(contextReducer, initialState);
     const [filter, setFilter] = useState(initialFilterState);
+    const [currency, setCurrency] = useState(initialCurrency);
 
     // Action Creators
     const deleteTransaction = (id) => {
@@ -38,6 +45,11 @@ export const Provider = ({ children }) => {
         setFilter(initialFilterState);
     }
 
+    const updateCurrency = (currency) => {
+        setCurrency(currency);
+        localStorage.setItem('currency', currency);
+    }
+
     const totalBalance = transactions.reduce((acc, currVal) => (currVal.type === 'Expense' ? acc - currVal.amount : acc + currVal.amount), 0);
 
     return (
@@ -46,9 +58,11 @@ export const Provider = ({ children }) => {
             addTransaction,
             updateFilter,
             clearFilter,
+            updateCurrency,
             transactions,
             totalBalance,
-            filter
+            filter,
+            currency
          }}>
             {children}
         </ExpensesManagerContext.Provider>

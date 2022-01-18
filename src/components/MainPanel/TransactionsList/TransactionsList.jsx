@@ -6,6 +6,7 @@ import { incomes, expenses } from '../../../categories/categoryTypes';
 import { ExpensesManagerContext } from '../../../context/context';
 import useFilteredTransactions from '../../../utils/useFilteredTransactions';
 import useStyles from './styles';
+import AddCurrencyToAmount from '../../../utils/AddCurrencyToAmount';
 
 
 const TransactionsList = () => {
@@ -40,7 +41,7 @@ const TransactionsList = () => {
         if (transaction.type === "Income") {
             color = "#007808";
         } else {
-            color = "ff0008"
+            color = "#ff0008"
         };
         return color;
     }
@@ -59,7 +60,7 @@ const TransactionsList = () => {
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary={transaction.category}
-                                      secondary={<Typography variant="subtitle2" style={{ color: getTransactionColor(transaction) }}>dupa</Typography>}
+                                      secondary={<Typography variant="subtitle2" style={{ color: getTransactionColor(transaction) }}>{AddCurrencyToAmount(transaction.amount)} - {transaction.date}</Typography>}
                         />
                         <ListItemSecondaryAction>
                             <IconButton edge="end" onClick={() => deleteTransaction(transaction.id)}>

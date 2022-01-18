@@ -5,14 +5,18 @@ const contextRedcuer = (state, action) => {
     let transactions;
 
     async function createTransaction(transaction) {
-        await API.graphql({ query: createTransactionMutation, variables: { input: transaction } });
+        try {
+            await API.graphql({ query: createTransactionMutation, variables: { input: transaction } });
+        } catch (error) {
+            console.error('Failed to add the transaction:', error);
+        }
       }
     
     async function deleteTransaction(id) {
         try {
             await API.graphql({ query: deleteTransactionMutation, variables: { input: { id } }});
         } catch (error) {
-            console.error('Failed deleting the transaction:', error);
+            console.error('Failed to delete the transaction:', error);
         }
     }
 

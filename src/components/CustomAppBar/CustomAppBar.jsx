@@ -4,6 +4,7 @@ import { Grid, AppBar, Divider, Typography, Menu, MenuItem, IconButton } from '@
 import { AccountCircle } from '@material-ui/icons';
 
 import { ExpensesManagerContext } from '../../context/context';
+import AddCurrencyToAmount from '../../utils/AddCurrencyToAmount';
 import InfoButton from '../InfoButton/InfoButton';
 import useStyles from './styles';
 
@@ -56,7 +57,7 @@ const CustomAppBar = ({ handleDeleteUser, handleSignOut }) => {
                 className={classes.balanceText}
                 variant="button"
               >
-                Total Balance: {totalBalance}
+                Total Balance: {AddCurrencyToAmount(totalBalance)}
               </Typography>
             </Grid>
           </AppBar>

@@ -46,7 +46,7 @@ const InfoButton = () => {
                         Add 100 expense for food yesterday.
                         <br />
                         <br />
-                        Pick and choose what transaction parameters you wish to use and enjoy using the speech function!
+                        Pick and choose what transaction parameters you want and enjoy using the speech recognition function!
                         </Typography>
                     </Box>
                     </Fade>
