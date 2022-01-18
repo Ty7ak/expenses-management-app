@@ -32,22 +32,22 @@ const MainPanel = () => {
             <Card style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                 <CardHeader title="Expenses Manager" />
                 <Grid container spacing = {0}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <CardContent>
                             <Divider className={classes.divider} />
                             <TransactionsList />
                             <Divider className={classes.divider} />
                         </CardContent>
                     </Grid>
-                    <Grid item container xs={6} justifyContent='space-between'>
-                        <Grid item xs={12}>
+                    <Grid item container sm={6} xs={12} justifyContent='space-between'>
+                        <Grid item sm={12}>
                         <CardContent className={classes.CardContent}>
                             <Divider className={classes.divider} />
                             <Typography align="center" variant="h6">Add transaction</Typography>
                             <NewTransactionForm />
                             </CardContent>
                         </Grid> 
-                        <Grid item xs={12}>     
+                        <Grid item sm={12}>     
                         <CardContent className={classes.CardContent}>   
                             <Box sx={{ m: 1 }}>                       
                                 <Typography align="center" variant="h6">Filter transactions</Typography>

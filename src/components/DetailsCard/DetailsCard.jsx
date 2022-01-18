@@ -16,12 +16,12 @@ const DetailsCard = ({ transactionType }) => {
     return (
         <Card className={classes.detailsCard}>
             <Typography
-                variant="h4"
+                variant="h5"
                 style={{marginTop: "15px"}}
             > {transactionType}s
             </Typography>
             <CardContent>
-                <Typography variant="h4">{AddCurrencyToAmount(typeTotal)}</Typography>
+                <Typography variant="h5">{AddCurrencyToAmount(typeTotal)}</Typography>
                 <Pie data={pieData} />
             </CardContent>
         </Card>
