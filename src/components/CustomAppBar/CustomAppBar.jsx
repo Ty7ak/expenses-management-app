@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 
-import { Grid, AppBar, Divider, Typography, Menu, MenuItem, IconButton } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
+import { Grid, AppBar, Divider, Typography, Menu, MenuItem, IconButton, FormControl, Select } from '@material-ui/core';
+import { AccountCircle, MonetizationOn } from '@material-ui/icons';
 
 import { ExpensesManagerContext } from '../../context/context';
 import AddCurrencyToAmount from '../../utils/AddCurrencyToAmount';
@@ -19,8 +19,12 @@ const CustomAppBar = ({ handleDeleteUser, handleSignOut }) => {
     const handleClose = () => {
         setanchorE1(null);
     };
+
+    const handleChange = (event) => {
+        updateCurrency(event.target.value);        
+    }
     
-    const { totalBalance } = useContext(ExpensesManagerContext);
+    const { totalBalance, updateCurrency, currency } = useContext(ExpensesManagerContext);
 
     const [anchorE1, setanchorE1] = useState(null);
 
@@ -49,6 +53,17 @@ const CustomAppBar = ({ handleDeleteUser, handleSignOut }) => {
                 <Divider style={{margin: '5px'}}/>
                 <MenuItem onClick={handleDeleteUser}>
                   Delete account
+                </MenuItem>
+                <Divider style={{margin: '5px'}}/>
+                <MenuItem>
+                  <FormControl margin='dense' fullWidth size="small" variant="standard"> 
+                      <Select variant="outlined" onChange={handleChange} value={currency}>
+                          <MenuItem value={'£'}>£</MenuItem>
+                          <MenuItem value={'PLN'}>PLN</MenuItem>
+                          <MenuItem value={'$'}>$</MenuItem>
+                          <MenuItem value={'€'}>€</MenuItem>
+                      </Select>
+                  </FormControl>
                 </MenuItem>
               </Menu>
               </div>

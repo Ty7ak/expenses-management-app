@@ -45,9 +45,6 @@ const TransactionsList = () => {
         };
         return color;
     }
-    
-
-    // KOLORY NA CZERWONO NIE DZIALAJA + DODAJ WARTOSC
 
     return (
         <MUIList dense={false} className={classes.list}>
