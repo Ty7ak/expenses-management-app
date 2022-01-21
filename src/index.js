@@ -10,11 +10,9 @@ import { SpeechProvider } from '@speechly/react-client';
 Amplify.configure(config);
 
 ReactDOM.render(
-        <SpeechProvider appId="a722e60d-18c9-4ca7-8144-3ba4625df8cd" language="en-US">
             <Provider>
                 <App />
-            </Provider>
-        </SpeechProvider>,
+            </Provider>,
 
 document.getElementById('root'));
 

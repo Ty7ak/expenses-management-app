@@ -41,12 +41,14 @@ const InfoButton = () => {
                         </Typography>
                         <Typography sx={{ mt: 2 }}>
                         <br />
-                        You can use your voice by holding the microphone icon to add transactions.
-                        Try saying the following:  
-                        Add 100 expense for food yesterday.
+                        You can use your voice by pressing the microphone icon once and talking to fill out transactions details! 
+                        For example, press the icon and say: Add expense in category rent for 100.
                         <br />
                         <br />
-                        Pick and choose what transaction parameters you want and enjoy using the speech recognition function!
+                        You can also change single parameters, like so: Change amount to 150.
+                        <br />
+                        <br />
+                        To finalize, press the icon and say: Create transaction.
                         </Typography>
                     </Box>
                     </Fade>

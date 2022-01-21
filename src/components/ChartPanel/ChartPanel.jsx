@@ -17,7 +17,7 @@ const ChartPanel = () => {
                 <CardHeader title="Details" />
                 <Box sx={{ m: 0.4 }}/>
                 <Grid container spacing={0} justifyContent="center" alignItems="center">
-                    <Grid item sm={4} xs={0}>
+                    <Grid item sm={4}>
                     </Grid>
                     <Grid item sm={4} xs={8}>                
                         <Typography align="center" variant="h5">Balance: {AddCurrencyToAmount(filteredTotal)}</Typography>

@@ -39,11 +39,6 @@ const App  = ({ signOut }) => {
               <ChartPanel />
             </Grid>
           </Grid>
-
-          <PushToTalkButtonContainer>
-            <PushToTalkButton />
-            <ErrorPanel />
-          </PushToTalkButtonContainer> 
         </div>
       )
 }
