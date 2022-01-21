@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Card, CardHeader, CardContent, Typography, Grid, Divider, Select, MenuItem, FormControl, InputLabel, Box } from '@material-ui/core';
 import DetailsCard from '../DetailsCard/DetailsCard';
 import useFilteredTransactions from '../../utils/useFilteredTransactions';
 import AddCurrencyToAmount from '../../utils/AddCurrencyToAmount';
-import { ExpensesManagerContext } from '../../context/context';
 
 import useStyles from './styles';
 
@@ -12,12 +11,6 @@ const ChartPanel = () => {
     const classes = useStyles();
 
     const { filteredTotal } = useFilteredTransactions();
-
-    const { currency, updateCurrency } = useContext(ExpensesManagerContext);
-
-    const handleChange = (event) => {
-        updateCurrency(event.target.value);        
-    }
 
     return (
             <Card style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -30,14 +23,6 @@ const ChartPanel = () => {
                         <Typography align="center" variant="h5">Balance: {AddCurrencyToAmount(filteredTotal)}</Typography>
                     </Grid>
                     <Grid item sm={4} xs={4}>
-                        <FormControl margin='dense'> 
-                            <Select style={{color: "#000000", backgroundColor: "#ffffff"}} variant="outlined" onChange={handleChange} value={currency}>
-                                <MenuItem value={'£'}>£</MenuItem>
-                                <MenuItem value={'PLN'}>PLN</MenuItem>
-                                <MenuItem value={'$'}>$</MenuItem>
-                                <MenuItem value={'€'}>€</MenuItem>
-                            </Select>
-                        </FormControl>
                     </Grid>
                 </Grid>
                 <Grid container spacing = {0}>

@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { Grid, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { Add } from '@material-ui/icons'
 import { ExpensesManagerContext } from '../../../context/context';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { v4 } from 'uuid';
 
 import useStyles from './styles';
@@ -17,8 +18,8 @@ import { useSpeechContext } from '@speechly/react-client';
 const todayDate = new Date()
 
 const emptyForm = {
-    amount: '',
-    category: 'Rent',
+    amount: 0,
+    category: '',
     type: 'Expense',
     date: parseDate(todayDate),
 };
@@ -51,7 +52,7 @@ const NewTransactionForm = () => {
                 const category = `${e.value.charAt(0)}${e.value.slice(1).toLowerCase()}`
                 switch (e.type) {
                     case 'amount':
-                        setEntryValues({ ...entryValues, amount: e.value})
+                        setEntryValues({ ...entryValues, amount: Number(e.value)})
                         break;
                     case 'category':
                         if(incomes.map((iC) => iC.type).includes(category)) {
@@ -78,17 +79,26 @@ const NewTransactionForm = () => {
     
     const selectedCategories = entryValues.type === 'Income' ? incomes : expenses;
 
+    const commands = [
+        {
+            command: ["Type *"],
+            callback: (voiceType) => setEntryValues({...entryValues, type: voiceType}),
+        },
+    ];
+    const {transcript, browserSupportsSpeechRecognition} = useSpeechRecognition({commands});
+
+    if (!browserSupportsSpeechRecognition) {
+        return <span>Browser doesnt support</span>
+    }
+
     return (
         <Grid container spacing = {2}>
             <ConfirmSnackbar open={open} setOpen={setOpen} content={"Transaction added successfully."}/>
             <Grid item xs={12}>
                 <Typography align="center" variant="subtitle2" gutterBottom>
-                    {segment ? (
-                        <>
-                            {segment.words.map((w) => w.value).join(" ")}
-                        </>
-                    ) : null }
+                    Transcript: {transcript}
                 </Typography>
+                <Button onClick={SpeechRecognition.startListening}>Start</Button>
             </Grid>
 
             <Grid item xs={6}>
